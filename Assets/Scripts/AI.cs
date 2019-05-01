@@ -90,14 +90,15 @@ public class AI : MonoBehaviour {
     }
   }
 
-    void AIdetection()
-    {
+  void AIdetection()
+  {
 
-        Ray MyRayLeft = new Ray(transform.position, transform.right);
-        Ray MyRayRight = new Ray(transform.position, -transform.right);//Raycast line 
-        float distanceToPlayer = Vector3.Distance(gameObject.transform.position, Player.transform.position);//Enemy calculates the distance to player.
+    Ray MyRayLeft = new Ray(transform.position, transform.right);
+    Ray MyRayRight = new Ray(transform.position, -transform.right);//Raycast line 
+    float distanceToPlayer = Vector3.Distance(gameObject.transform.position, Player.transform.position);//Enemy calculates the distance to player.
+    float distanceToPoint1 = Vector3.Distance(gameObject.transform.position, point1.transform.position);
 
-        RaycastHit hit;// information of what has been hit by the ray
+    RaycastHit hit;// information of what has been hit by the ray
 
     if (Physics.Raycast(MyRayLeft, out hit, 5))
     {
@@ -106,10 +107,9 @@ public class AI : MonoBehaviour {
       if (hit.collider.CompareTag("Player_Body") && distanceToPlayer <= maxDistance)
       {
         followPlayer = true;
-        Debug.Log("Distance to player: " + distanceToPlayer);
       }
-    
-      if(distanceToPlayer >= maxDistance)
+
+      if (distanceToPlayer >= maxDistance)
       {
         followPlayer = false;
         anim.SetBool("IsRunning", false);
@@ -128,12 +128,12 @@ public class AI : MonoBehaviour {
         {
           anim.SetBool("isAttacking", true);
         }
-  
       }
 
+      Debug.Log("Distance to player: " + distanceToPlayer);
+      Debug.Log("distance to point 1" + distanceToPoint1);
     }
-   
-    }
+  } 
 
 }
     
