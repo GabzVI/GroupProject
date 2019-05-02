@@ -31,18 +31,13 @@ public class PlayerController : MonoBehaviour {
 	void Update ()
   {
     Keycheck();
-
-  }
- 
-  void FixedUpdate()
-  {
     // TODO move input into a different component at some point
-    if (canMove != false)
+    if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
     {
       Movecharacter();
     }
-    
   }
+
 
 	void Movecharacter()
 	{
