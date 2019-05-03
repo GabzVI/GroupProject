@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - AI_Point
+  - Player_Body
+  - Enemy
+  - EnemySword
   layers:
   - Default
   - TransparentFX
