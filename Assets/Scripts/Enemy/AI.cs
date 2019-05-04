@@ -16,7 +16,7 @@ public class AI : MonoBehaviour {
     Animator anim;
     bool followPlayer;
     bool right;
-   
+    public bool isDead;
     // Use this for initialization
     void Start ()
     {
@@ -40,7 +40,7 @@ public class AI : MonoBehaviour {
       Debug.DrawRay(transform.position, transform.right * 5.0f, Color.red);
       //Debug.DrawRay(transform.position, -transform.right * 5.0f, Color.red);
     }
-        
+     
   }
   
 
@@ -133,6 +133,7 @@ public class AI : MonoBehaviour {
       //Debug.Log("Distance to player: " + distanceToPlayer);
       //Debug.Log("distance to point 1" + distanceToPoint1);
     }
+  
   } 
 
 }

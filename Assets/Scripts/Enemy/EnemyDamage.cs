@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyDamage : MonoBehaviour {
 
   public GameObject player;
+  public GameObject enemy;
+  Animator anim;
   bool hitPlayer;
 
 
@@ -12,6 +14,9 @@ public class EnemyDamage : MonoBehaviour {
 	void Start ()
   {
     player = GameObject.FindGameObjectWithTag("Player");
+    enemy = GameObject.FindGameObjectWithTag("Enemy");
+    anim = enemy.gameObject.GetComponent<Animator>();
+
     hitPlayer = false;
 
   }
@@ -42,7 +47,7 @@ public class EnemyDamage : MonoBehaviour {
   // Update is called once per frame
   void Update()
   {
-    if (hitPlayer == true)
+    if (hitPlayer == true && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
     {
       player.GetComponent<Player_Health>().AddDamage(1);
     }

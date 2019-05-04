@@ -23,7 +23,7 @@ public class Player_Actions : MonoBehaviour {
     if (other.gameObject.CompareTag("EnemySword"))
     {
       hitEnemy = true;
-      Debug.Log("We hit: " + other.gameObject.name);
+      //Debug.Log("We hit: " + other.gameObject.name);
     }
   }
 
@@ -41,7 +41,8 @@ public class Player_Actions : MonoBehaviour {
   {
     if(hitEnemy == true && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))//Add animation 
     {
-      enemy.GetComponent<Enemy_Health>().AddDamage(1);
+      enemy.GetComponent<Enemy_Health>().AddDamage(3);
+ 
     }
   }
 }
