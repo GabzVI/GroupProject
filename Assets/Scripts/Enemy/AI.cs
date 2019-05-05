@@ -15,11 +15,12 @@ public class AI : MonoBehaviour {
     public float xAngle = 0, yAngle = 0, zAngle = 0;
     bool followPlayer;
     public bool right;
+    public bool isDead;
     // Use this for initialization
     void Start ()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        enemy = this.gameObject;
         anim = enemy.gameObject.GetComponent<Animator>();
         anim.SetFloat("speed", Mathf.Abs(move)); 
         followPlayer = false;
@@ -30,19 +31,22 @@ public class AI : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
   {
-        AIdetection();
+    if (player != null)
+    {
+      AIdetection();
+    }
+    
     
       Debug.DrawRay(transform.position, transform.forward * 10.0f, Color.red);
       //Debug.DrawRay(transform.position, -transform.right * 5.0f, Color.red);
-    
   }
-  
+
 
 
   void AIdetection()
   {
 
-    Ray MyRayLeft = new Ray(transform.position, transform.forward); 
+    Ray MyRayLeft = new Ray(transform.position, transform.forward);
     float distanceToPlayer = Vector3.Distance(gameObject.transform.position, player.transform.position);//Enemy calculates the distance to player.
 
 
@@ -59,7 +63,7 @@ public class AI : MonoBehaviour {
       }
       if (followPlayer == true)
       {
-       
+
         if (distanceToPlayer >= minDistance)
         {
           gameObject.transform.Translate(new Vector3(0, 0, move * walkSpeed) * Time.deltaTime);
@@ -71,17 +75,20 @@ public class AI : MonoBehaviour {
         {
           anim.SetBool("isAttacking", true);
         }
-       
+
       }
-     
+
       if (player.GetComponent<Player_Health>().currentHealth <= 0)
       {
         followPlayer = false;
       }
 
-      Debug.Log("Distance to player: " + distanceToPlayer);
-      
+
+      //Debug.Log("Distance to player: " + distanceToPlayer);
+
     }
+    
+    
     yAngle = 180;
     if (right)
     {
@@ -100,6 +107,6 @@ public class AI : MonoBehaviour {
       }
     }
   }
-
+ 
 }
     

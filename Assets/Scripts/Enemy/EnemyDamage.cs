@@ -14,8 +14,7 @@ public class EnemyDamage : MonoBehaviour {
 	void Start ()
   {
     player = GameObject.FindGameObjectWithTag("Player");
-    enemy = GameObject.FindGameObjectWithTag("Enemy");
-    anim = enemy.gameObject.GetComponent<Animator>();
+    anim = enemy.GetComponent<Animator>();
 
     hitPlayer = false;
 
@@ -28,8 +27,9 @@ public class EnemyDamage : MonoBehaviour {
     if (other.gameObject == player)
     {
       // ... the player is in range.
+      
       hitPlayer = true;
-      Debug.Log("We hit: " + other.gameObject.name);
+      //Debug.Log("We hit: " + other.gameObject.name);
     }
   }
 
@@ -37,7 +37,7 @@ public class EnemyDamage : MonoBehaviour {
   void OnTriggerExit(Collider other)
   {
     // If the exiting collider is the player...
-    if (other.gameObject == player)
+    if (other.gameObject == player && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
     {
       // ... the player is no longer in range.
       hitPlayer = false;
@@ -47,9 +47,14 @@ public class EnemyDamage : MonoBehaviour {
   // Update is called once per frame
   void Update()
   {
-    if (hitPlayer == true && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+    if (player != null)
     {
-      player.GetComponent<Player_Health>().AddDamage(1);
+      if (hitPlayer == true && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+      {
+        player.GetComponent<Player_Health>().AddDamage(0.5f);
+
+      }
     }
+    
   }
 }

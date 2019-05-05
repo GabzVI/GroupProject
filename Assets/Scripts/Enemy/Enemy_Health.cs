@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Enemy_Health : MonoBehaviour {
 
-    public int fullHealth = 100;
-    public int currentHealth;
+    public float fullHealth = 100;
+    public float currentHealth;
     public Slider EnemyHealth;
     public GameObject enemy;
     Animator anim;
@@ -16,9 +16,10 @@ public class Enemy_Health : MonoBehaviour {
 	void Start ()
   {
         currentHealth = fullHealth;
-        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        enemy = this.gameObject;
         anim = enemy.GetComponent<Animator>();
         anim.SetBool("IsDead", false);
+        isDead = false;
   }
 	
 	// Update is called once per frame
@@ -31,7 +32,7 @@ public class Enemy_Health : MonoBehaviour {
   
   }
 
- public void AddDamage(int damage)
+ public void AddDamage(float damage)
   {
 
     currentHealth -= damage;
@@ -47,10 +48,7 @@ public class Enemy_Health : MonoBehaviour {
   public void Destroyenemy()
   {
     isDead = true;
-    if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Death") && enemy != null)
-    {
-      Destroy(gameObject);
-      enemy = null;
-    }
+    enemy = null;
+    this.gameObject.GetComponent<AI>().enabled = false;
   }
 }

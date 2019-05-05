@@ -13,7 +13,6 @@ public class Player_Actions : MonoBehaviour {
 	void Start ()
   {
     hitEnemy = false;
-		enemy = GameObject.FindGameObjectWithTag("Enemy");
     player = GameObject.FindGameObjectWithTag("Player");
     anim = player.gameObject.GetComponent<Animator>();
   }
@@ -22,6 +21,7 @@ public class Player_Actions : MonoBehaviour {
   {
     if (other.gameObject.CompareTag("EnemySword"))
     {
+      enemy = other.gameObject;
       hitEnemy = true;
       //Debug.Log("We hit: " + other.gameObject.name);
     }
@@ -32,7 +32,7 @@ public class Player_Actions : MonoBehaviour {
     if (other.gameObject.CompareTag("EnemySword") && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
     {
       hitEnemy = false;
-
+      enemy = null;
     }
   }
 
@@ -43,7 +43,7 @@ public class Player_Actions : MonoBehaviour {
     {
       if (enemy != null)
       {
-        enemy.GetComponent<Enemy_Health>().AddDamage(3);
+        enemy.GetComponentInParent<Enemy_Health>().AddDamage(15);
         enemy = null;
       }
  

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Player_Health : MonoBehaviour {
 
-  public int initialHealth = 100;
-  public int currentHealth;
+  public float initialHealth = 100;
+  public float currentHealth;
   public Slider healthSlider;
   public GameObject player;
   public Image damagePlayer;
@@ -30,7 +30,7 @@ public class Player_Health : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
   {
-    if (damaged)
+    if (damaged && currentHealth <= 10)
     {
       damagePlayer.color = flashColour;
     }
@@ -41,7 +41,7 @@ public class Player_Health : MonoBehaviour {
     damaged = false;
 	}
 
- public void AddDamage(int damage)
+ public void AddDamage(float damage)
   {
     damaged = true;
 
@@ -56,7 +56,12 @@ public class Player_Health : MonoBehaviour {
 
   public void Destroyplayer()
   {
+    
     isDead = true;
-    Destroy(gameObject);
+    if (player != null)
+    {
+      Destroy(gameObject);
+      player = null;
+    }
   }
 }

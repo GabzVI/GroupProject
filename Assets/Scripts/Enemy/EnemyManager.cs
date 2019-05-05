@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour {
   public GameObject player;
   public GameObject enemy;
-  public float spawnTimer = 3f;
+  public float spawnTimer;
   public Transform[] spawnPoints;
 
 	// Use this for initialization
@@ -13,7 +13,7 @@ public class EnemyManager : MonoBehaviour {
   {
     InvokeRepeating("Spawn", spawnTimer, spawnTimer);
     player = GameObject.FindGameObjectWithTag("Player");
-
+    
   }
 	
 	// Update is called once per frame
@@ -24,19 +24,20 @@ public class EnemyManager : MonoBehaviour {
   void Spawn()
   {
     // If the player has no health left...
-    if (player.GetComponent<Player_Health>().currentHealth <= 0f)
+    if (player != null)
     {
-      // ... exit the function.
-      return;
+      if (player.GetComponent<Player_Health>().currentHealth <= 0f)
+      {
+        // ... exit the function.
+        return;
+      }
     }
-
     // Find a random index between zero and one less than the number of spawn points.
     int spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
     // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
     Instantiate(enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-    Instantiate(enemy, enemy.transform.position, Quaternion.identity);
-  
+    
   }
 }
 
