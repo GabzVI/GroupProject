@@ -12,7 +12,7 @@ public class Player_Health : MonoBehaviour {
   public Image damagePlayer;
   public float flashSpeed = 5f;
   public Color flashColour = new Color(1f, 0, 0, 1f);
-
+  
   Animator anim;
 
 

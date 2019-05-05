@@ -24,7 +24,11 @@ public class Enemy_Health : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
   {
-    EnemyHealth.transform.position = enemy.transform.position + enemy.transform.up + new Vector3(0f,0.2f,0f);
+    if (enemy != null)
+    {
+      EnemyHealth.transform.position = enemy.transform.position + enemy.transform.up + new Vector3(0f, 0.2f, 0f);
+    }
+  
   }
 
  public void AddDamage(int damage)
@@ -43,9 +47,10 @@ public class Enemy_Health : MonoBehaviour {
   public void Destroyenemy()
   {
     isDead = true;
-    if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Death"))
+    if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Death") && enemy != null)
     {
       Destroy(gameObject);
+      enemy = null;
     }
   }
 }

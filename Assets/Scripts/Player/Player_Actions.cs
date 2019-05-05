@@ -41,7 +41,11 @@ public class Player_Actions : MonoBehaviour {
   {
     if(hitEnemy == true && anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))//Add animation 
     {
-      enemy.GetComponent<Enemy_Health>().AddDamage(3);
+      if (enemy != null)
+      {
+        enemy.GetComponent<Enemy_Health>().AddDamage(3);
+        enemy = null;
+      }
  
     }
   }

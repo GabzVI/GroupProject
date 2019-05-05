@@ -4,122 +4,65 @@ using UnityEngine;
 
 public class AI : MonoBehaviour {
 
-    float walkSpeed = 1.0f;
+    float walkSpeed = 1f;
     float coolDown = 0.2f;
-    float maxDistance = 5.0f;
+    float maxDistance = 20.0f;
     float minDistance = 1.0f;
     float move = 2.0f;
-    public GameObject point1;
-    public GameObject point2;
-    public GameObject Player;
+    public GameObject player;
     public GameObject enemy;
     Animator anim;
+    public float xAngle = 0, yAngle = 0, zAngle = 0;
     bool followPlayer;
-    bool right;
-    public bool isDead;
+    public bool right;
     // Use this for initialization
     void Start ()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         anim = enemy.gameObject.GetComponent<Animator>();
-        anim.SetFloat("speed", Mathf.Abs(move));
-      
-        right = false;
+        anim.SetFloat("speed", Mathf.Abs(move)); 
         followPlayer = false;
-	}
+        right = false;
+    
+	  }
 	
 	// Update is called once per frame
 	void Update ()
-    {
+  {
         AIdetection();
-    if (followPlayer != true)
-    {
-            Patrol();
-           anim.SetBool("IsWalking", true);
-      Debug.DrawRay(transform.position, transform.right * 5.0f, Color.red);
+    
+      Debug.DrawRay(transform.position, transform.forward * 10.0f, Color.red);
       //Debug.DrawRay(transform.position, -transform.right * 5.0f, Color.red);
-    }
-     
+    
   }
   
 
-    void Patrol()
-    {
-    // Calculate first distance
-
-    if (right == false)
-    {
-      float Distance = Vector3.Distance(gameObject.transform.position, point1.transform.position);
-      //    Debug.Log("Right is false, Distance: " + Distance);
-      if (Distance <= 1)
-      {
-        coolDown -= Time.deltaTime;
-        if (coolDown <= 0)
-        {
-          right = true;
-          transform.Rotate(transform.rotation.x, -180, -transform.rotation.z);
-          coolDown = 0.2f;
-        }
-      }
-      else
-      {
-        gameObject.transform.Translate(new Vector3(move * walkSpeed, 0, 0) * Time.deltaTime);
-      }
-
-
-    }
-    else
-    {
-      float Distance = Vector3.Distance(gameObject.transform.position, point2.transform.position);
-      if (Distance <= 1)
-      {
-        coolDown -= Time.deltaTime;
-        if (coolDown <= 0)
-        {
-          right = false;
-          transform.Rotate(transform.rotation.x, 180, transform.rotation.z);
-          coolDown = 0.2f;
-        }
-      }
-      else
-      {
-        gameObject.transform.Translate(new Vector3(move * walkSpeed, 0, 0) * Time.deltaTime);
-
-      }
-    }
-  }
 
   void AIdetection()
   {
 
-    Ray MyRayLeft = new Ray(transform.position, transform.right);
-    Ray MyRayRight = new Ray(transform.position, -transform.right);//Raycast line 
-    float distanceToPlayer = Vector3.Distance(gameObject.transform.position, Player.transform.position);//Enemy calculates the distance to player.
-    float distanceToPoint1 = Vector3.Distance(gameObject.transform.position, point1.transform.position);
+    Ray MyRayLeft = new Ray(transform.position, transform.forward); 
+    float distanceToPlayer = Vector3.Distance(gameObject.transform.position, player.transform.position);//Enemy calculates the distance to player.
+
+
 
     RaycastHit hit;// information of what has been hit by the ray
 
-    if (Physics.Raycast(MyRayLeft, out hit, 5))
+    if (Physics.Raycast(MyRayLeft, out hit, 20))
     {
       //Debug.Log("Ai hits: " + hit.collider.name);
 
-      if (hit.collider.CompareTag("Player_Body") && distanceToPlayer <= maxDistance)
+      if (hit.collider.CompareTag("Player_Body"))
       {
         followPlayer = true;
       }
-
-      if (distanceToPlayer >= maxDistance)
+      if (followPlayer == true)
       {
-        followPlayer = false;
-        anim.SetBool("IsRunning", false);
-      }
-      if (followPlayer != false)
-      {
-
+       
         if (distanceToPlayer >= minDistance)
         {
-          gameObject.transform.Translate(new Vector3(move * walkSpeed, 0, 0) * Time.deltaTime);
+          gameObject.transform.Translate(new Vector3(0, 0, move * walkSpeed) * Time.deltaTime);
           anim.SetBool("IsRunning", true);
           anim.SetBool("IsWalking", false);
           anim.SetBool("isAttacking", false);
@@ -128,13 +71,35 @@ public class AI : MonoBehaviour {
         {
           anim.SetBool("isAttacking", true);
         }
+       
+      }
+     
+      if (player.GetComponent<Player_Health>().currentHealth <= 0)
+      {
+        followPlayer = false;
       }
 
-      //Debug.Log("Distance to player: " + distanceToPlayer);
-      //Debug.Log("distance to point 1" + distanceToPoint1);
+      Debug.Log("Distance to player: " + distanceToPlayer);
+      
     }
-  
-  } 
+    yAngle = 180;
+    if (right)
+    {
+      if (gameObject.transform.position.x < player.transform.position.x)
+      {
+        gameObject.transform.Rotate(xAngle, yAngle, zAngle);
+        right = false;
+      }
+    }
+    else if (!right)
+    {
+      if (gameObject.transform.position.x > player.transform.position.x)
+      {
+        gameObject.transform.Rotate(xAngle, yAngle, zAngle);
+        right = true;
+      }
+    }
+  }
 
 }
     
