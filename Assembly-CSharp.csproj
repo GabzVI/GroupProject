@@ -94,6 +94,7 @@
      <Compile Include="Assets\Scripts\Player\Player_Health.cs" />
      <Compile Include="Assets\Scripts\Player\Player_Level.cs" />
      <Compile Include="Assets\Scripts\Ramen_Restoration.cs" />
+     <Compile Include="Assets\Scripts\UI_Manager.cs" />
      <None Include="Assets\NatureStarterKit2\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />

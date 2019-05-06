@@ -2382,9 +2382,8 @@ MonoBehaviour:
   currentHealth: 0
   EnemyHealth: {fileID: 114894900490934600}
   enemy: {fileID: 1147682861835544}
-  Ramen: {fileID: 0}
   isDead: 0
-  R_dropRate: 0
+  EXPToGain: 25
 --- !u!114 &114894900490934600
 MonoBehaviour:
   m_ObjectHideFlags: 1
