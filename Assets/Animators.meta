@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: 45edd391b968c8b4bb5ee0af7235c92c
 folderAsset: yes
+<<<<<<< HEAD:Assets/Animators.meta
 timeCreated: 1557103760
+=======
+timeCreated: 1557093146
+>>>>>>> bd0f6a134906b3169ae6093bfac0999a734e7a40:Assets/Resources/Materials.meta
 licenseType: Free
 DefaultImporter:
-  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -12,8 +12,12 @@ public class Player_Health : MonoBehaviour {
   public Image damagePlayer;
   public float flashSpeed = 5f;
   public Color flashColour = new Color(1f, 0, 0, 1f);
-  
-  Animator anim;
+
+  public int Player_level;
+  public int EXP;
+  public double Level_Limit;
+    
+    Animator anim;
 
 
   bool isDead;
@@ -25,11 +29,24 @@ public class Player_Health : MonoBehaviour {
     currentHealth = initialHealth;
     player = GameObject.FindGameObjectWithTag("Player");
     anim = player.gameObject.GetComponent<Animator>();
+
+        Player_level = 1;
+        EXP = 0;
+        Level_Limit = 100;
+        
   }
 	
 	// Update is called once per frame
 	void Update ()
   {
+        if (EXP >= Level_Limit)
+        {
+            Player_level += 1;
+            EXP = 0;
+            Level_Limit *= 1.5;
+            initialHealth += 10;
+        }
+
     if (damaged && currentHealth <= 10)
     {
       damagePlayer.color = flashColour;
@@ -64,4 +81,36 @@ public class Player_Health : MonoBehaviour {
       player = null;
     }
   }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Ramen")
+        {
+            Destroy(other.gameObject);
+            Debug.Log("We hit ramen");
+            currentHealth += 50;
+            if (currentHealth > initialHealth)
+            {
+                currentHealth = initialHealth;
+            }
+            healthSlider.value = currentHealth;
+
+        }
+    }
+
+    public void OnCollisionEnter(Collider other)
+    {
+        if (other.gameObject.name == "BentoBox")
+        {
+            Destroy(other.gameObject);
+            Debug.Log("We hit the Bento box");
+            currentHealth += 25;
+            if (currentHealth > initialHealth)
+            {
+                currentHealth = initialHealth;
+            }
+            healthSlider.value = currentHealth;
+
+        }
+    }
 }
