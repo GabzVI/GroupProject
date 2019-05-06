@@ -8,7 +8,9 @@ public class Player_Actions : MonoBehaviour {
   public GameObject player;
   Animator anim;
   public bool hitEnemy;
-  
+
+  public int Strength;
+
 	// Use this for initialization
 	void Start ()
   {
@@ -43,10 +45,15 @@ public class Player_Actions : MonoBehaviour {
     {
       if (enemy != null)
       {
-        enemy.GetComponentInParent<Enemy_Health>().AddDamage(15);
+        enemy.GetComponentInParent<Enemy_Health>().AddDamage(15 + Strength);
         enemy = null;
       }
  
     }
   }
+
+    public void Increase_Strength(int STR_Up)
+    {
+        Strength += STR_Up;//increases strength by 1 each time the player levels up
+    }
 }
