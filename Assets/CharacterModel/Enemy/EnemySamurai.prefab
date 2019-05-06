@@ -1149,6 +1149,7 @@ GameObject:
   - component: {fileID: 4998694226468490}
   - component: {fileID: 65991457936163156}
   - component: {fileID: 114233239032822386}
+  - component: {fileID: 95395426153970004}
   m_Layer: 0
   m_Name: ninjato (1)
   m_TagString: EnemySword
@@ -2145,7 +2146,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2161,7 +2161,6 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -2179,7 +2178,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2195,7 +2193,6 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -2230,6 +2227,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.31040955, y: 0.13189697, z: 2.9275599}
   m_Center: {x: 0, y: 1.3447514, z: 3.7707481}
+--- !u!95 &95395426153970004
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1996392961294666}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 342831d8bb7214f49af9361db8488131, type: 3}
+  m_Controller: {fileID: 9100000, guid: 0f49f7716385d754db59b5cb24f7fe89, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95542312444425022
 Animator:
   serializedVersion: 3
@@ -2368,7 +2382,9 @@ MonoBehaviour:
   currentHealth: 0
   EnemyHealth: {fileID: 114894900490934600}
   enemy: {fileID: 1147682861835544}
+  Ramen: {fileID: 0}
   isDead: 0
+  R_dropRate: 0
 --- !u!114 &114894900490934600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2455,7 +2471,6 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -2471,7 +2486,6 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

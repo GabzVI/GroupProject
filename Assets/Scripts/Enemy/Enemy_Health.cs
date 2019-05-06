@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using System;
 
 public class Enemy_Health : MonoBehaviour {
 
@@ -9,8 +10,13 @@ public class Enemy_Health : MonoBehaviour {
     public float currentHealth;
     public Slider EnemyHealth;
     public GameObject enemy;
+    //public GameObject Ramen;
     Animator anim;
     public bool isDead;
+    //public int R_dropRate;
+
+    public int EXPGained;
+    private Player_Level Player_stats;
 
 	// Use this for initialization
 	void Start ()
@@ -20,6 +26,9 @@ public class Enemy_Health : MonoBehaviour {
         anim = enemy.GetComponent<Animator>();
         anim.SetBool("IsDead", false);
         isDead = false;
+
+        Player_stats = FindObjectOfType<Player_Level>();
+
   }
 	
 	// Update is called once per frame
@@ -42,10 +51,14 @@ public class Enemy_Health : MonoBehaviour {
     {
       anim.SetBool("IsDead", true);
       Destroyenemy();
+
+      Player_stats.AddEXP(EXPGained);
     }
   }
 
-  public void Destroyenemy()
+   
+
+    public void Destroyenemy()
   {
     isDead = true;
     enemy = null;
